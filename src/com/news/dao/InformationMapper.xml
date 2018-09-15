@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.news.dao.InformationMapper">
+	
+	<!-- int updateViewCount(id); -->
+	<update id="updateViewCount">
+		update informations
+			set viewCount = viewCount + 1
+				where id = #{id}
+	</update>
+	
+	<resultMap type="Informations" id="infoReplieMap">
+		<id column="id" property="id"/>
+		<collection property="replies" ofType="Replies">
+			<id column="rid" property="id"/>
+			<result column="rcontent" property="content"/>
+		</collection>
+	</resultMap>
+	
+	<!-- Informations getInfoById(@Param("id")Integer id); -->
+	<select id="getInfoById" resultMap="infoReplieMap">
+		select 
+			i.*,r.id as rid,r.content as rcontent,
+				r.replyTime,r.infoId
+				from informations i,replies r
+					where i.id = r.infoId
+						and i.id = #{id}
+							order by r.replyTime 
+	</select>
+	
+	
+	<!-- List<Informations> getInfoList(); -->
+	<select id="getInfoList" resultType="Informations">
+		select * from informations order by lastMdfTime DESC
+	</select>
+</mapper>

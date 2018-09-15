@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 因为默认情况下 这些标签约束来自于公网,所以断网的情况下我们没法得到标签提示 -->
+<!-- 因为IDE需要加载这个文件 才能给你提示  所以你可以配置为本地约束... -->
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="autoMappingBehavior" value="FULL"/>
+	</settings>
+
+	<!-- 配置类型别名 -->
+	<typeAliases>
+		<package name="com.news.pojo"/>
+	</typeAliases>
+	
+</configuration>
